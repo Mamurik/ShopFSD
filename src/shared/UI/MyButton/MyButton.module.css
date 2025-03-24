@@ -1,0 +1,30 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 40px;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100px;
+    background: #f41384;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.2s; 
+    cursor: pointer; 
+}
+
+.button:hover {
+    background: #b1256b;
+}
+
+.button:active {
+    background: #000000;
+}
+
+.button:focus {
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(244, 19, 132, 0.5); 
+}
