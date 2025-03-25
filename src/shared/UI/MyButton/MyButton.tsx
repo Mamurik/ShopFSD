@@ -3,6 +3,7 @@ import classes from "../MyButton/MyButton.module.css";
 interface MyButtonProps {
   onClick?: () => void;
   children: React.ReactNode;
+  className?: string;
 }
 
 const MyButton: FC<MyButtonProps> = ({ children, onClick }) => {
@@ -13,4 +14,4 @@ const MyButton: FC<MyButtonProps> = ({ children, onClick }) => {
   );
 };
 
-export default MyButton;
+export default React.memo(MyButton);

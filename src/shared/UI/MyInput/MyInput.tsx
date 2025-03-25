@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import React, { ChangeEvent, FC } from "react";
 import classes from "../MyInput/MyInput.module.css";
 
 interface MyInputProps {
@@ -25,4 +25,4 @@ const MyInput: FC<MyInputProps> = ({
   );
 };
 
-export default MyInput;
+export default React.memo(MyInput);

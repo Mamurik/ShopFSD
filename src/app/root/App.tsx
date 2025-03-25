@@ -1,14 +1,10 @@
-import MyButton from "../../shared/UI/MyButton/MyButton";
-import MyInput from "../../shared/UI/MyInput/MyInput";
+import ProductList from "../../entities/ui/Product/ProductList/ProductList";
 
 const App = () => {
   return (
     <div>
-      <MyButton>Buy</MyButton>
-      <br />
-      <MyInput></MyInput>
+      <ProductList></ProductList>
     </div>
   );
 };
-
 export default App;
