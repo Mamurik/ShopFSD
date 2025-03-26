@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { BsStarFill } from "react-icons/bs";
+import { MdClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../app/store/store";
 import { addLike, removeLike } from "../../../../features/services/LikeSlice";
@@ -11,9 +12,14 @@ import classes from "../ProductItem/ProductItem.module.css";
 interface ProductItemProps {
   product: IProduct;
   onClick?: (product: IProduct) => IProduct;
+  removeItem?: (id: number) => void;
 }
 
-const ProductItem: FC<ProductItemProps> = ({ product, onClick }) => {
+const ProductItem: FC<ProductItemProps> = ({
+  product,
+  onClick,
+  removeItem,
+}) => {
   const dispatch = useDispatch();
   const likes = useSelector((store: RootState) => store.likes.likes);
 
@@ -32,6 +38,14 @@ const ProductItem: FC<ProductItemProps> = ({ product, onClick }) => {
       onClick={() => onClick && onClick(product)}
       className={classes.productItem}
     >
+      {removeItem && (
+        <MdClose
+          onClick={() => removeItem(product.id)}
+          className={classes.cansel}
+          size={25}
+        />
+      )}
+
       <div className={classes.rate}>
         {product.rating.rate} <BsStarFill></BsStarFill>
       </div>
