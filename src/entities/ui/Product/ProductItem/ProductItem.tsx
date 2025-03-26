@@ -1,20 +1,42 @@
 import React, { FC } from "react";
-import classes from "../ProductItem/ProductItem.module.css";
-import { IProduct } from "../../../types/IProduct";
+import Like from "../../../../shared/UI/Like/Like";
 import MyButton from "../../../../shared/UI/MyButton/MyButton";
+import { IProduct } from "../../../types/IProduct";
+import classes from "../ProductItem/ProductItem.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../../app/store/store";
+import { addLike, removeLike } from "../../../../features/services/LikeSlice";
+
 interface ProductItemProps {
   product: IProduct;
   onClick?: (product: IProduct) => IProduct;
 }
+
 const ProductItem: FC<ProductItemProps> = ({ product, onClick }) => {
+  const dispatch = useDispatch();
+  const likes = useSelector((store: RootState) => store.likes.likes);
+
+  const isLiked = likes.some((like) => like.id === product.id);
+
+  const handleLikeClick = () => {
+    if (isLiked) {
+      dispatch(removeLike(product));
+    } else {
+      dispatch(addLike(product));
+    }
+  };
+
   return (
-    <div onClick={() => onClick} className={classes.productItem}>
+    <div
+      onClick={() => onClick && onClick(product)}
+      className={classes.productItem}
+    >
       <p className={classes.rate}>{product.rating.rate} *</p>
       <h1 className={classes.title}>{product.title}</h1>
-      <img className={classes.image} src={product.image} alt="" />
+      <img className={classes.image} src={product.image} alt={product.title} />
       <p className={classes.desc}>{product.description}</p>
       <p className={classes.category}>{product.category}</p>
-
+      <Like handleClick={handleLikeClick} liked={isLiked} />
       <MyButton>Купить</MyButton>
     </div>
   );

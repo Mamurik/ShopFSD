@@ -1,9 +1,9 @@
-import ProductList from "../../entities/ui/Product/ProductList/ProductList";
+import AppRouter from "../../pages/routes/AppRouter";
 
 const App = () => {
   return (
     <div>
-      <ProductList></ProductList>
+      <AppRouter></AppRouter>
     </div>
   );
 };
