@@ -39,8 +39,11 @@ const ProductItem: FC<ProductItemProps> = ({ product, onClick }) => {
       <img className={classes.image} src={product.image} alt={product.title} />
       <p className={classes.desc}>{product.description}</p>
       <p className={classes.category}>{product.category}</p>
-      <Like handleClick={handleLikeClick} liked={isLiked} />
-      <MyButton>Купить</MyButton>
+
+      <div className={classes.buttonch}>
+        <Like handleClick={handleLikeClick} liked={isLiked} />
+        <MyButton>Купить</MyButton>
+      </div>
     </div>
   );
 };
