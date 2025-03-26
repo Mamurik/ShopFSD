@@ -49,6 +49,9 @@
 }
 
 .rate {
+    display: flex;
+    align-items: center;
+    text-align: center;
     margin-left:230px ; 
     font-weight: 700;
     color: orange;
