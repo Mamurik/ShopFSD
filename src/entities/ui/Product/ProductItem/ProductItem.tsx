@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { BsStarFill } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../app/store/store";
 import { addLike, removeLike } from "../../../../features/services/LikeSlice";
@@ -11,18 +12,12 @@ import classes from "../ProductItem/ProductItem.module.css";
 
 interface ProductItemProps {
   product: IProduct;
-  onClick?: (product: IProduct) => IProduct;
   removeItem?: (id: number) => void;
 }
 
-const ProductItem: FC<ProductItemProps> = ({
-  product,
-  onClick,
-  removeItem,
-}) => {
+const ProductItem: FC<ProductItemProps> = ({ product, removeItem }) => {
   const dispatch = useDispatch();
   const likes = useSelector((store: RootState) => store.likes.likes);
-
   const isLiked = likes.some((like) => like.id === product.id);
 
   const handleLikeClick = () => {
@@ -34,10 +29,7 @@ const ProductItem: FC<ProductItemProps> = ({
   };
 
   return (
-    <div
-      onClick={() => onClick && onClick(product)}
-      className={classes.productItem}
-    >
+    <div className={classes.productItem}>
       {removeItem && (
         <MdClose
           onClick={() => removeItem(product.id)}
@@ -45,14 +37,21 @@ const ProductItem: FC<ProductItemProps> = ({
           size={25}
         />
       )}
-
       <div className={classes.rate}>
-        {product.rating.rate} <BsStarFill></BsStarFill>
+        {product.rating.rate} <BsStarFill />
       </div>
-      <h1 className={classes.title}>{product.title}</h1>
-      <img className={classes.image} src={product.image} alt={product.title} />
-      <p className={classes.desc}>{product.description}</p>
-      <p className={classes.category}>{product.category}</p>
+
+      {/* Делаем весь контейнер кликабельным */}
+      <Link to={`/Products/${product.id}`} className={classes.link}>
+        <h1 className={classes.title}>{product.title}</h1>
+        <img
+          className={classes.image}
+          src={product.image}
+          alt={product.title}
+        />
+        <p className={classes.desc}>{product.description}</p>
+        <p className={classes.category}>{product.category}</p>
+      </Link>
 
       <div className={classes.buttonch}>
         <Like handleClick={handleLikeClick} liked={isLiked} />

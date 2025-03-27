@@ -22,11 +22,11 @@ const MyHeader = () => {
             <BiHeart size={40}></BiHeart>
           </Link>
 
-          <Link className={classes.login_text} to={"*"}>
-            <p>Login</p>
+          <Link className={classes.login_text} to={"/Create-product"}>
+            <p>CreateProduct</p>
           </Link>
           <Link className={classes.login_text} to={"*"}>
-            <p>Registration</p>
+            <p>LogIn/LogOut</p>
           </Link>
         </div>
       </div>
