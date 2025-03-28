@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../app/store/store";
 import Loader from "../../../../shared/UI/Loader/Loader";
@@ -15,6 +15,7 @@ const ProductList = () => {
   );
 
   const { data: allProducts, isError, isLoading } = useGetProductsQuery();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     if (allProducts) {
@@ -22,9 +23,15 @@ const ProductList = () => {
     }
   }, [allProducts, dispatch]);
 
+  const filteredProducts = useMemo(() => {
+    return products?.filter((product) =>
+      product.title.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [products, search]);
+
   const startIndex = (currentPage - 1) * perPage;
   const paginatedProducts =
-    products?.slice(startIndex, startIndex + perPage) || [];
+    filteredProducts?.slice(startIndex, startIndex + perPage) || [];
 
   const removeItem = (id: number) => {
     dispatch(
@@ -41,24 +48,29 @@ const ProductList = () => {
       </div>
     );
   }
-  if (products?.length === 0) {
-    return (
-      <h1 className={classes.productList} style={{ marginTop: "50px" }}>
-        Товаров больше нет, ты все удалил, хнык
-      </h1>
-    );
-  }
+
   return (
     <>
-      <Pagination></Pagination>
+      <input
+        type="text"
+        placeholder="Поиск по названию"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className={classes.searchInput}
+      />
+      <Pagination />
       <div className={classes.productList}>
-        {paginatedProducts.map((product) => (
-          <ProductItem
-            removeItem={removeItem}
-            product={product}
-            key={product.id}
-          />
-        ))}
+        {paginatedProducts.length > 0 ? (
+          paginatedProducts.map((product) => (
+            <ProductItem
+              removeItem={removeItem}
+              product={product}
+              key={product.id}
+            />
+          ))
+        ) : (
+          <h1 style={{ marginTop: "50px" }}>Товаров не найдено</h1>
+        )}
       </div>
     </>
   );
