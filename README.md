@@ -35,7 +35,7 @@
 - **Redux Toolkit (RTK) & RTK Query** (Глобальное состояние и работа с API)
 - **React Router DOM** (Маршрутизация)
 - **Feature-Sliced Design (FSD)** (Структурирование проекта)
-- **Bootstrap / SCSS / CSS Modules** (Стилизация)
+- **CSS Modules** (Стилизация)
 
 ## Установка и запуск проекта
 
