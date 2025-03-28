@@ -1,58 +1,78 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
+# SPA для списка продуктов
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## О проекте
 
-Currently, two official plugins are available:
+Этот проект представляет собой Single Page Application (SPA) на основе React, TypeScript, RTK, RTK Query и React Router DOM, реализованный по методологии Feature-Sliced Design (FSD).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Приложение использует публичное API [FakeStoreAPI](https://fakestoreapi.com/products/) для получения списка продуктов.
 
-## Expanding the ESLint configuration
+### Функционал
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Список продуктов (/products)**
+   - Отображение списка товаров с сервера.
+   - Каждая карточка товара содержит изображение, название и описание (сокращенное до фиксированной высоты).
+   - Возможность лайкать товары (сохранение в избранное).
+   - Удаление карточек товаров.
+   - Фильтрация товаров (все товары / только избранные).
+   - Переход на детальную страницу товара при клике на карточку.
+   - Пагинация списка.
+   - Поиск товаров в реальном времени.
+   - Созданы собственные Ui компоненты(Loader,MyButton,Like,Pagination)
+2. **Страница продукта (/products/:id)**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+   - Отображение детальной информации о продукте.
+   - Кнопка для возврата на страницу списка товаров.
+
+3. **Создание продукта (/create-product)**
+   - Форма для добавления нового товара.
+   - Валидация данных.
+   - Сохранение созданного товара в store.
+
+## Технологии
+
+- **React** (Создание компонентов пользовательского интерфейса)
+- **TypeScript** (Строгая типизация)
+- **Redux Toolkit (RTK) & RTK Query** (Глобальное состояние и работа с API)
+- **React Router DOM** (Маршрутизация)
+- **Feature-Sliced Design (FSD)** (Структурирование проекта)
+- **Bootstrap / SCSS / CSS Modules** (Стилизация)
+
+## Установка и запуск проекта
+
+### Клонирование репозитория:
+
+```sh
+ git clone https://github.com/Mamurik/ShopFSD
+ cd your-project-folder
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Установка зависимостей:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+npm install
 ```
-=======
-# ShopFSD
->>>>>>> cb54a7a947a2182051691bad15c6e0a8277f2d9f
+
+### Запуск проекта в режиме разработки:
+
+```sh
+npm run dev
+```
+
+### Сборка проекта:
+
+```sh
+npm run build
+```
+
+
+## Структура проекта (FSD)
+
+```
+/src
+ ├── app        # Конфигурация приложения
+ ├── entities   # Бизнес-сущности
+ ├── features   # Фичи (лайк, удаление)
+ ├── pages      # Страницы приложения
+ ├── shared     # Общие компоненты и утилиты
+ ├── widgets     # Самостоятельные блоки
+```
